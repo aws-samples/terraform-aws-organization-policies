@@ -3,7 +3,11 @@
     "Statement": [
         {
             "Effect": "Deny",
-            "Action": ["organizations:LeaveOrganization","iam:CreateAccessKey", "iam:CreateUser"],
+            "Action": [
+                "organizations:LeaveOrganization",
+                "iam:CreateAccessKey",
+                "iam:CreateUser"
+            ],
             "Resource": "*"
         },
         {
@@ -16,20 +20,6 @@
                         "arn:aws:iam::*:root"
                     ]
                 }
-            }
-        },
-        {
-            "Effect": "Deny",
-            "Action": [
-                  "*" 
-              ],
-            "Resource": [
-                  "*" 
-              ],
-            "Condition": {
-                  "Bool": {
-                      "ram:AllowsExternalPrincipals": "true"
-                  }
             }
         }
     ]
