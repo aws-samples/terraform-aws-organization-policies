@@ -11,14 +11,17 @@
             "Resource": "*"
         },
         {
+            "Effect": "Deny",
             "Action": "*",
             "Resource": "*",
-            "Effect": "Deny",
             "Condition": {
-                "StringLike": {
+                "ArnLike": {
                     "aws:PrincipalArn": [
                         "arn:aws:iam::*:root"
                     ]
+                },
+                "Null": {
+                    "aws:AssumedRoot": "true"
                 }
             }
         }
