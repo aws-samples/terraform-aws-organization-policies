@@ -1,0 +1,24 @@
+name: fmt
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs: 
+  fmt: 
+    runs-on: ubuntu-latest
+
+    steps: 
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: setup terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ vars.TERRAFORM_VERSION }} 
+
+      - name: terraform init
+        run: terraform init -backend=false
+
+      - name: terraform fmt check
+        run: terraform fmt --recursive --check
