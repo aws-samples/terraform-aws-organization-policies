@@ -12,3 +12,9 @@ variable "policies_directory" {
 variable "policy_type" {
   type = string
 }
+
+variable "template_variables" {
+  description = "Variables to substitute in policy templates (.json.tpl files)"
+  type        = map(string)
+  default     = {}
+}
