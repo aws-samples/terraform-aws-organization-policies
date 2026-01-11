@@ -3,7 +3,7 @@
 
 resource "aws_organizations_policy" "this" {
   for_each = local.policy_content
-  name     = each.key
+  name     = trimprefix(trimsuffix(each.key, ".json"), "${local.policies_directory}/")
   content  = each.value
   type     = var.policy_type
 }
