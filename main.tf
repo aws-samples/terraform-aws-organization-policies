@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: MIT-0
 
 resource "aws_organizations_policy" "this" {
-  for_each = fileset(path.root, "${local.policies_directory}/*.json")
-  name     = trimprefix(trimsuffix(each.value, ".json"), "${local.policies_directory}/")
-  content  = file(each.value)
+  for_each = local.policy_content
+  name     = trimprefix(trimsuffix(each.key, ".json"), "${local.policies_directory}/")
+  content  = each.value
   type     = var.policy_type
 }
 
