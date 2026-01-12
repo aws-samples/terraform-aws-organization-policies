@@ -1,13 +1,13 @@
 ## terraform-aws-organization-policies
 
-Deploy SCPs, RCPs, and other AWS Organization policies with Terraform.
+Deploy SCPs, RCPs, and other AWS [organization policies](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies.html) with Terraform.
 
 ## Module Inputs
 SCP example:
 ```hcl
 module "scps" {
   source      = "aws-samples/organization-policies/aws"
-  version     = "3.0.1"
+  version     = "3.1.0"
   policy_type = "SERVICE_CONTROL_POLICY"
   ou_map = {
     "r-1xyz"           = ["root", "allow_services"] #root
@@ -20,7 +20,7 @@ RCP example:
 ```hcl
 module "rcps" {
   source      = "aws-samples/organization-policies/aws"
-  version     = "3.0.1"
+  version     = "3.1.0"
   policy_type = "RESOURCE_CONTROL_POLICY"
   ou_map = {
     "r-1xyz" = ["root"] #root
@@ -28,9 +28,9 @@ module "rcps" {
 }
 ```
 
-`policy_type` is the type of organizational policy. Valid values are `AISERVICES_OPT_OUT_POLICY`, `BACKUP_POLICY`, `RESOURCE_CONTROL_POLICY`, `SERVICE_CONTROL_POLICY`, and `TAG_POLICY`. A new module needs to be created for each policy type. 
+`policy_type` is the type of organizational policy. A new module needs to be created for each policy type. 
 
-`ou_map` is a map of OU IDs and the policies attached to them. Policies are stored as JSON files in an adjacent directory. The directory name defaults to the policy type, eg `./service_control_policy/`.
+`ou_map` is a map of OU IDs and the policies attached to them. Policies are stored as `json` files in an adjacent directory. The directory name defaults to the policy type, eg `./service_control_policy/`.
 
 The above two module inputs would look like this:
 ```
@@ -54,7 +54,26 @@ module "scps" {
 }
 ```
 
-`policies_directory` can be used to change the name and location of the directory used to store policies. Otherwise it will default to the name of the policy type, eg `./service_control_policy/`.
+`policies_directory` overrides the name and location of the directory used to store policies. Otherwise it will default to the name of the policy type, eg `./service_control_policy/`.
+
+### Template Files
+
+The module accepts template files (`.json.tpl`). These can be inputted alongside `json` files.  
+```hcl
+module "scps" {
+  source      = "aws-samples/organization-policies/aws"
+  version     = "3.1.0"
+  policy_type = "SERVICE_CONTROL_POLICY"
+  ou_map = {
+    "r-1xyz"           = ["root", "iam"] #root
+  }
+  template_variables = {
+    management_account_id = var.management_account_id
+  }
+}
+```
+`template_variables` inserts variables into template files. See [iam.json.tpl](./service_control_policy/iam.json.tpl) for an example. 
+
 
 ## Troubleshooting
 
