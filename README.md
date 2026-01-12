@@ -7,7 +7,7 @@ SCP example:
 ```hcl
 module "scps" {
   source      = "aws-samples/organization-policies/aws"
-  version     = "3.0.1"
+  version     = "3.1.0"
   policy_type = "SERVICE_CONTROL_POLICY"
   ou_map = {
     "r-1xyz"           = ["root", "allow_services"] #root
@@ -20,7 +20,7 @@ RCP example:
 ```hcl
 module "rcps" {
   source      = "aws-samples/organization-policies/aws"
-  version     = "3.0.1"
+  version     = "3.1.0"
   policy_type = "RESOURCE_CONTROL_POLICY"
   ou_map = {
     "r-1xyz" = ["root"] #root
@@ -62,7 +62,7 @@ The module accepts template files (`.json.tpl`). These can be inputted alongside
 ```hcl
 module "scps" {
   source      = "aws-samples/organization-policies/aws"
-  version     = "3.0.1"
+  version     = "3.1.0"
   policy_type = "SERVICE_CONTROL_POLICY"
   ou_map = {
     "r-1xyz"           = ["root", "iam"] #root
