@@ -29,12 +29,18 @@
             "ec2:CreateVpnConnection",
             "ec2:AllocateIpamPoolCidr",
             "ec2:AssociateTransitGateway*",
+            "ec2:CreateTransitGatewayVpcAttachment",
+            "ec2:AcceptTransitGatewayVpcAttachment",
+            "ec2:CreateTransitGatewayPeeringAttachment",
+            "ec2:AcceptTransitGatewayPeeringAttachment",
+            "networkmanager:CreateVpcAttachment",
             "globalaccelerator:*",
             "directconnect:*",
             "route53domains:RegisterDomain",
             "route53domains:TransferDomain",
             "route53resolver:*",
-            "ram:CreateResourceShare"
+            "ram:CreateResourceShare",
+            "ram:AcceptResourceShareInvitation"
             ],
         "Resource": "*"
       }
