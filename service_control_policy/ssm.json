@@ -18,7 +18,7 @@
             "Resource": "arn:aws:ssm:*:*:servicesetting/ssm/managed-instance/default-ec2-instance-management-role",
             "Condition": {
                 "ArnNotLike": {
-                    "aws:PrincipalARN": "arn:aws:iam::${Account}:role/[PRIVILEGED_ROLE]"
+                    "aws:PrincipalARN": "arn:aws:iam::*:role/AWSControlTowerExecution"
                 }
             }
         }
